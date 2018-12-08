@@ -1,0 +1,28 @@
+<div *ngIf="tickets; else elseBlock">
+  <p>Filter</p>
+  <select #filterValue (change)="filter(filterValue.value)">
+    <option value="0">All</option>
+    <option value="1">Completed</option>
+    <option value="2">Uncompleted</option>
+  </select>
+  <ul>
+    <li *ngFor="let t of tickets">
+      <a routerLink="/tickets/{{t.id}}">Ticket: {{t.id}}</a>
+      <label>
+        Completed:
+        <input #ticketChecked type="checkbox" (change)="toggleComplete(t.id, ticketChecked.checked)" [checked]="t.completed"
+          [disabled]="loading" />
+      </label>
+    </li>
+  </ul>
+  <div>
+    <label>Ticket descriprion:
+      <input #ticketName />
+    </label>
+    <button (click)="add(ticketName.value); ticketName.value=''" [disabled]="loading">add</button>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <p>Loading...</p>
+</ng-template>

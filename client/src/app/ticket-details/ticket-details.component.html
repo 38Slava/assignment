@@ -1,0 +1,10 @@
+<div *ngIf="ticket; else elseBlock">
+  <p>Ticket: {{ticket.id}}, {{ticket.description}}</p>
+  <p>Assigned user:</p>
+  <select [(ngModel)]="assignedUser" (change)="assignUser($event)" [disabled]="loading">
+    <option *ngFor="let user of users" [ngValue]="user">{{user.name}}</option>
+  </select>
+</div>
+<ng-template #elseBlock>
+  <p>Loading...</p>
+</ng-template>
